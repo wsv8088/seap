@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsun.seap.dao.persistence.orm.UserDao">
+	
+	<resultMap type="com.wsun.seap.domain.po.User" id="userResult">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+	</resultMap>
+	
+	<select id="queryUserList" resultMap="userResult">
+		SELECT ID,NAME FROM sys_user
+	</select>
+
+</mapper>
