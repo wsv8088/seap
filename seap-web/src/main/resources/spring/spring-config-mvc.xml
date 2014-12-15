@@ -15,6 +15,8 @@
 
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/static/**" location="/static/" cache-period="864000"/>
+
 
     <bean id="velocityConfigurer"
           class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
@@ -23,27 +25,23 @@
         </property>
         <property name="velocityProperties">
             <props>
-                <prop key="directive.foreach.counter.name">
-                    loopCounter
-                </prop>
-                <prop key="directive.foreach.counter.initial.value">
-                    0
-                </prop>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
                 <prop key="input.encoding">UTF-8</prop>
                 <prop key="output.encoding">UTF-8</prop>
                 <prop key="contentType">text/html;charset=UTF-8</prop>
+                <prop key="velocimacro.library">macro.vm</prop>
             </props>
         </property>
     </bean>
     <!-- 定义JSP文件的位置 -->
-    <bean class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
-        <property name="prefix" value=""/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="layoutUrl" value="layout/default.vm"/>
         <property name="suffix" value=".vm"/>
         <property name="contentType">
             <value>text/html;charset=UTF-8</value>
         </property>
-        <property name="layoutUrl" value="layout/default.vm"/>
-        <property name="order" value="1"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
         <property name="numberToolAttribute" value="numbertool"/>
         <property name="dateToolAttribute" value="datetool"/>
     </bean>
@@ -55,5 +53,72 @@
                 <prop key="java.lang.Throwable">error/500</prop>
             </props>
         </property>
+    </bean>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+        <property name="maxUploadSize">
+            <value>32505856</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件-->
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <property name="mediaTypes">
+                    <map>
+                        <entry key="html" value="text/html"/>
+                        <entry key="xsl" value="application/vnd.ms-excel"/>
+                        <entry key="xml" value="application/xml"/>
+                        <entry key="json" value="application/json"/>
+                    </map>
+                </property>
+                <property name="defaultContentType" value="text/html"/>
+                <!-- not by accept header -->
+                <property name="ignoreAcceptHeader" value="true"/>
+            </bean>
+        </property>
+
+        <property name="viewResolvers">
+            <list>
+                <ref bean="viewResolver"/>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 国际化支持 -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="cookieName" value="_clientlocale"/>
+        <property name="defaultLocale" value="zh_CN"/>
+        <property name="cookieMaxAge" value="2147483647"/>
+    </bean>
+
+    <!-- 国际化文件 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="i18n/message"/>
+        <property name="cacheSeconds" value="5"/>
     </bean>
 </beans>

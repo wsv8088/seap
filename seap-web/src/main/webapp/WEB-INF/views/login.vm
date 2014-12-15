@@ -1,4 +1,5 @@
-<form id="loginForm" action="" method="post" class="form-horizontal">
+#set($layout="layout/main.vm")
+<form id="loginForm" action="#springUrl('login')" method="post" class="form-horizontal">
     <div class="control-group">
         <label for="username" class="control-label">名称:</label>
 

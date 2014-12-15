@@ -24,7 +24,6 @@ public class DefaultPermissionRealm extends AuthorizingRealm {
 	}
 
 
-
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo (AuthenticationToken authenticationToken) throws AuthenticationException {
 		return null;

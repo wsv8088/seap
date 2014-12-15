@@ -12,7 +12,11 @@
     <packaging>war</packaging>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.wsun.seap</groupId>
+            <artifactId>seap-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.wsun.seap</groupId>
             <artifactId>seap-dao</artifactId>
@@ -63,6 +67,11 @@
         </dependency>
         <!-- Spring framework end -->
 
+        <!-- jackson json begin -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
         <!-- Apache shiro begin -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -84,6 +93,13 @@
             <artifactId>shiro-ehcache</artifactId>
         </dependency>
         <!-- Apache shiro end -->
+
+        <!-- Apache fileupload begin -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <!-- Apache fileupload end -->
 
         <!-- Velocity begin -->
         <dependency>

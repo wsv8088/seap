@@ -4,7 +4,6 @@ import com.wsun.seap.domain.po.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Administrator on 2014/12/14 0014.
@@ -21,8 +20,7 @@ public class LoginController {
 
         String username = user.getName();
         String password = user.getPassword();
-
         System.out.println(username + "===>" + password);
-        return "login";
+        return "modules/main";
     }
 }

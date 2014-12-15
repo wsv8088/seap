@@ -21,28 +21,28 @@ import javax.servlet.ServletResponse;
 @Service
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
-    public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
+	public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
 
-    private String captchaParam = DEFAULT_CAPTCHA_PARAM;
+	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
 
-    public String getCaptchaParam() {
-        return captchaParam;
-    }
+	public String getCaptchaParam () {
+		return captchaParam;
+	}
 
-    protected String getCaptcha(ServletRequest request) {
-        return WebUtils.getCleanParam(request, getCaptchaParam());
-    }
+	protected String getCaptcha (ServletRequest request) {
+		return WebUtils.getCleanParam(request, getCaptchaParam());
+	}
 
-    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        String username = getUsername(request);
-        String password = getPassword(request);
-        if (password == null) {
-            password = "";
-        }
-        boolean rememberMe = isRememberMe(request);
-        String host = getHost(request);
-        String captcha = getCaptcha(request);
-        return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha);
-    }
+	protected AuthenticationToken createToken (ServletRequest request, ServletResponse response) {
+		String username = getUsername(request);
+		String password = getPassword(request);
+		if (password == null) {
+			password = "";
+		}
+		boolean rememberMe = isRememberMe(request);
+		String host = getHost(request);
+		String captcha = getCaptcha(request);
+		return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha);
+	}
 
 }
