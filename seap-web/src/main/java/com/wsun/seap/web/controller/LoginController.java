@@ -21,6 +21,7 @@ public class LoginController {
         String username = user.getName();
         String password = user.getPassword();
         System.out.println(username + "===>" + password);
+
         return "modules/main";
     }
 }
