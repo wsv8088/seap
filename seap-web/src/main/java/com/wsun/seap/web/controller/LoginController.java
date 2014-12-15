@@ -23,6 +23,6 @@ public class LoginController {
         String password = user.getPassword();
 
         System.out.println(username + "===>" + password);
-        return "login/a";
+        return "login";
     }
 }
