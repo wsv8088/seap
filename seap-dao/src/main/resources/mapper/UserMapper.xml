@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper   
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wsun.seap.dao.persistence.orm.UserDao">
-	
-	<resultMap type="com.wsun.seap.domain.po.User" id="userResult">
-		<result property="id" column="ID" />
-		<result property="name" column="NAME" />
+
+	<resultMap id="userResultMap" type="com.wsun.seap.domain.po.User">
+		<result property="id" column="ID" jdbcType="BIGINT"/>
+		<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+		<result property="password" column="password" jdbcType="VARCHAR"/>
+		<result property="realName" column="real_name" jdbcType="VARCHAR"/>
+		<result property="password" column="password" jdbcType="VARCHAR"/>
+		<result property="phone" column="phone" jdbcType="VARCHAR"/>
+		<result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+		<result property="email" column="email" jdbcType="VARCHAR"/>
 	</resultMap>
 	
-	<select id="queryUserList" resultMap="userResult">
-		SELECT ID,NAME FROM sys_user
+	<sql id="columns">
+		  id, company, department, login_name, PASSWORD,
+		  real_name, email, phone, mobile, user_type,
+		  login_ip, login_date, create_by, create_date,
+		  update_by, update_date, remarks, yn
+	</sql>
+	
+	<sql id="condition">
+		<where>
+			<if test = "loginName != null and loginName != ''">
+				login_name = #{loginName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryUserList" parameterType="com.wsun.seap.domain.po.User"
+			resultMap="userResultMap">
+		SELECT
+			<include refid="columns"/>
+		FROM sys_user
+		<include refid="condition"/>
+	</select>
+
+	<select id="queryUser" parameterType="com.wsun.seap.domain.po.User"
+			resultType="com.wsun.seap.domain.po.User">
+		SELECT
+		<include refid="columns"/>
+		FROM sys_user
+		<include refid="condition"/>
 	</select>
 
 </mapper>

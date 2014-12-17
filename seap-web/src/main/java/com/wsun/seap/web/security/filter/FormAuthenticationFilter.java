@@ -6,6 +6,7 @@
 package com.wsun.seap.web.security.filter;
 
 import com.wsun.seap.web.security.token.UsernamePasswordToken;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 
 	public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
 
-	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
-
-	public String getCaptchaParam () {
-		return captchaParam;
-	}
-
-	protected String getCaptcha (ServletRequest request) {
-		return WebUtils.getCleanParam(request, getCaptchaParam());
-	}
-
+	@Override
 	protected AuthenticationToken createToken (ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);
 		String password = getPassword(request);
@@ -43,6 +35,16 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		String host = getHost(request);
 		String captcha = getCaptcha(request);
 		return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha);
+	}
+
+	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
+
+	public String getCaptchaParam () {
+		return captchaParam;
+	}
+
+	protected String getCaptcha (ServletRequest request) {
+		return WebUtils.getCleanParam(request, getCaptchaParam());
 	}
 
 }

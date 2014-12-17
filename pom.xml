@@ -49,6 +49,7 @@
         <!-- other setting -->
         <aopalliance.version>1.0</aopalliance.version>
         <downloadSources>false</downloadSources>
+
     </properties>
 
     <dependencyManagement>
@@ -166,6 +167,8 @@
                 <version>${spring.version}</version>
             </dependency>
             <!-- spring orm end -->
+
+            <!-- Servlet api end -->
 
             <!-- MyBatis -->
             <dependency>

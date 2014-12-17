@@ -5,3 +5,4 @@
 
 <!-- 导入js脚本 -->
 <script type="text/javascript" src="#springUrl('/static/bootstrap/js/bootstrap.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/static/jquery/jquery-1.9.1.min.js')"></script>

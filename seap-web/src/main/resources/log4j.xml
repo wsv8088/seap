@@ -61,7 +61,7 @@
         </filter>
     </appender>
 
-    <!--<category name="com.wsun.seap" additivity="true">
+    <category name="com.wsun.seap" additivity="true">
         <priority value="debug"/>
         <appender-ref ref="EXCEPTION"/>
         <appender-ref ref="DEBUG"/>
@@ -71,10 +71,10 @@
     <category name="java.sql" additivity="true">
         <priority value="DEBUG"/>
         <appender-ref ref="SQL"/>
-    </category>-->
+    </category>
 
     <root>
-        <priority value="debug"/>
+        <priority value="INFO"/>
         <appender-ref ref="STDOUT"/>
     </root>
 </log4j:configuration>

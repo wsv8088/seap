@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.wsun.seap</groupId>
-            <artifactId>seap-dao</artifactId>
+            <artifactId>seap-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

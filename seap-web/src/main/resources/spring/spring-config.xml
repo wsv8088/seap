@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-    <context:component-scan base-package="com.wsun.seap.web"/>
+    <context:component-scan base-package="com.wsun.seap"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -22,7 +22,7 @@
 
     <import resource="spring-config-datasource.xml"/>
     <import resource="spring-config-tx.xml"/>
-    <import resource="spring-config-mvc.xml"/>
     <import resource="spring-config-shiro.xml"/>
+    <import resource="spring-config-mvc.xml"/>
 
 </beans>
