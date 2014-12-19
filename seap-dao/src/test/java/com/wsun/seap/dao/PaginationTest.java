@@ -1,4 +1,4 @@
-package com.wsun.seap.dao.persistence;
+package com.wsun.seap.dao;
 
 import org.junit.Test;
 

@@ -3,10 +3,10 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.wsun.seap.dao.persistence.interceptor;
+package com.wsun.seap.dao.interceptor;
 
-import com.wsun.seap.dao.persistence.dialect.Dialect;
-import com.wsun.seap.dao.persistence.orm.Page;
+import com.wsun.seap.dao.context.Page;
+import com.wsun.seap.dao.dialect.Dialect;
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
 import org.apache.ibatis.mapping.BoundSql;
@@ -88,25 +88,21 @@ public class SQLHelper {
     /**
      * 查询总纪录数
      * @param sql             SQL语句
-     * @param connection      数据库连接
      * @param mappedStatement mapped
      * @param parameterObject 参数
      * @param boundSql        boundSql
      * @return 总记录数
      * @throws java.sql.SQLException sql查询错误
      */
-    public static int getCount(final String sql, final Connection connection,
+    public static int getCount(final String sql,
     							final MappedStatement mappedStatement, final Object parameterObject,
     							final BoundSql boundSql) throws SQLException {
-        final String countSql = "select count(1) from (" + sql + ") tmp_count";
-//        final String countSql = "select count(1) " + removeSelect(removeOrders(sql));
-        Connection conn = connection;
+        final String countSql = "select count(1) from (" + removeOrders(sql) + ") tmp_count";
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-        	if (conn == null){
-        		conn = mappedStatement.getConfiguration().getEnvironment().getDataSource().getConnection();
-            }
+            conn = mappedStatement.getConfiguration().getEnvironment().getDataSource().getConnection();
         	ps = conn.prepareStatement(countSql);
             BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(), countSql,
                     boundSql.getParameterMappings(), parameterObject);
@@ -132,21 +128,6 @@ public class SQLHelper {
 
 
     /**
-     * 根据数据库方言，生成特定的分页sql
-     * @param sql     Mapper中的Sql语句
-     * @param page    分页对象
-     * @param dialect 方言类型
-     * @return 分页SQL
-     */
-    public static String generatePageSql(String sql, Page<?> page, Dialect dialect) {
-        if (dialect.supportsLimit()) {
-            return dialect.getLimitString(sql, page.getFirstResult(), page.getMaxResults());
-        } else {
-            return sql;
-        }
-    }
-    
-    /** 
      * 去除qlString的select子句。 
      * @param qlString
      * @return 
@@ -163,7 +144,7 @@ public class SQLHelper {
      * @return 
      */  
     @SuppressWarnings("unused")
-	private static String removeOrders(String qlString) {  
+	public static String removeOrders(String qlString) {
         Pattern p = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*", Pattern.CASE_INSENSITIVE);  
         Matcher m = p.matcher(qlString);  
         StringBuffer sb = new StringBuffer();  

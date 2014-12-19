@@ -1,7 +1,8 @@
 package com.wsun.seap.service.system;
 
-import com.wsun.seap.domain.po.User;
-import org.springframework.stereotype.Service;
+import com.wsun.seap.dao.context.Page;
+import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.domain.po.system.User;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ import java.util.List;
  * Created by dbwangshuang on 2014/12/16.
  */
 public interface UserService {
-	public List<User> queryPageUserList(User user);
+	public List<User> queryUserList(QueryParam param);
 
-	public List<User> queryUserList(User user);
+	public Page<User> queryPageUserList(QueryParam param);
 
-	public User queryUser(User user);
+	public User queryUser(QueryParam param);
 }

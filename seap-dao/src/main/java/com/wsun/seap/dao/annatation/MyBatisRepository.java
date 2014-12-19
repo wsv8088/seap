@@ -1,4 +1,4 @@
-package com.wsun.seap.dao.persistence.annatation;
+package com.wsun.seap.dao.annatation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

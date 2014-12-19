@@ -6,7 +6,8 @@
 package com.wsun.seap.web.security.realm;
 
 import com.wsun.seap.common.constant.SystemConst;
-import com.wsun.seap.domain.po.User;
+import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.domain.po.system.User;
 import com.wsun.seap.service.system.UserService;
 import com.wsun.seap.web.security.token.UsernamePasswordToken;
 import org.apache.shiro.authc.*;
@@ -16,6 +17,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +36,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Resource
 	private UserService userService;
 
+	@Resource
+	private CacheManager cacheManager;
+
 	/**
 	 * 认证回调函数, 登录时调用
 	 */
@@ -43,8 +48,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 因为在登录的时候构建的是自定义的token,因此此处可转换为对应的类
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 		String username = token.getUsername();
-		User param = new User();
-		param.setLoginName(username);
+		QueryParam param = new QueryParam();
+
 		User user = userService.queryUser(param);
 		if (user != null) {
 			return new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());

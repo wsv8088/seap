@@ -27,9 +27,10 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!-- 如果选择由Mybatis自动生成dao的代理实现类,则启用如下注解,但是缓存注解将无法使用 -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.wsun.seap.dao.persistence.orm"/>
-        <property name="annotationClass" value="com.wsun.seap.dao.persistence.annatation.MyBatisRepository"/>
-    </bean>
+        <property name="annotationClass" value="MyBatisRepository"/>
+    </bean>-->
 
 </beans>

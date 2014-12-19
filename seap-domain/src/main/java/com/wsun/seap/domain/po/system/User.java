@@ -1,4 +1,4 @@
-package com.wsun.seap.domain.po;
+package com.wsun.seap.domain.po.system;
 
 import java.util.Date;
 
@@ -27,19 +27,7 @@ public class User {
 
 	private int userType;
 
-	private Date createDate;
-
-	private String createBy;
-
-	private Date updateDate;
-
-	private String updateBy;
-
 	private String loginIp;
-
-	private String remarks;
-
-	private int yn;
 
 	public Integer getId () {
 		return id;
@@ -121,38 +109,6 @@ public class User {
 		this.userType = userType;
 	}
 
-	public Date getCreateDate () {
-		return createDate;
-	}
-
-	public void setCreateDate (Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getCreateBy () {
-		return createBy;
-	}
-
-	public void setCreateBy (String createBy) {
-		this.createBy = createBy;
-	}
-
-	public Date getUpdateDate () {
-		return updateDate;
-	}
-
-	public void setUpdateDate (Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public String getUpdateBy () {
-		return updateBy;
-	}
-
-	public void setUpdateBy (String updateBy) {
-		this.updateBy = updateBy;
-	}
-
 	public String getLoginIp () {
 		return loginIp;
 	}
@@ -161,19 +117,4 @@ public class User {
 		this.loginIp = loginIp;
 	}
 
-	public String getRemarks () {
-		return remarks;
-	}
-
-	public void setRemarks (String remarks) {
-		this.remarks = remarks;
-	}
-
-	public int getYn () {
-		return yn;
-	}
-
-	public void setYn (int yn) {
-		this.yn = yn;
-	}
 }

@@ -1,12 +1,11 @@
 package mybatis;
 
-import com.wsun.seap.dao.persistence.orm.Page;
-import com.wsun.seap.dao.persistence.orm.UserDao;
-import com.wsun.seap.domain.po.User;
-import org.springframework.cache.CacheManager;
+import com.wsun.seap.dao.context.Page;
+import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.dao.orm.UserDao;
+import com.wsun.seap.domain.po.system.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import java.util.List;
 
@@ -18,6 +17,8 @@ public class TestMybatis {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-config.xml");
-
+        UserDao userDao = (UserDao) ctx.getBean("userDao");
+        Page<User> pageUsers = userDao.queryPageUsers(new QueryParam());
+        System.out.println(pageUsers.getRows().size());
     }
 }

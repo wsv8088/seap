@@ -6,7 +6,7 @@
 package com.wsun.seap.dao.persistence.interceptor;
 
 import com.wsun.seap.common.utils.ReflectionsUtil;
-import com.wsun.seap.dao.persistence.orm.Page;
+import com.wsun.seap.dao.interceptor.BaseInterceptor;
 import org.apache.ibatis.executor.statement.BaseStatementHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -54,16 +54,6 @@ public class PreparePaginationInterceptor extends BaseInterceptor {
                 final Connection connection = (Connection) ivk.getArgs()[MAPPED_STATEMENT_INDEX];
                 final String sql = boundSql.getSql();
                 //记录统计
-                final int count = SQLHelper.getCount(sql, connection, mappedStatement, parameterObject, boundSql);
-                Page<Object> page = null;
-                page = convertParameter(parameterObject);
-                page.setCount(count);
-                String pagingSql = SQLHelper.generatePageSql(sql, page, dialect);
-                if (log.isDebugEnabled()) {
-                    log.debug("PAGE SQL:" + pagingSql);
-                }
-                //将分页sql语句反射回BoundSql.
-                ReflectionsUtil.setFieldValue(boundSql, "sql", pagingSql);
             }
 
             if (boundSql.getSql() == null || "".equals(boundSql.getSql())) {
