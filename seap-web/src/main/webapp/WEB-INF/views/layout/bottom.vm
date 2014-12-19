@@ -1,3 +1,7 @@
-<div class="page-header" style="text-align: center" >
-  <h3><small>版权所有 翻版必究</small></h3>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <p>Copyright © 2014 <a href="http://www.seap.com/">Seap</a> www.seap.com 版权所有.</p>
+        </div>
+    </div>
 </div>
