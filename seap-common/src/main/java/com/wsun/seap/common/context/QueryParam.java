@@ -1,7 +1,7 @@
 /* 
  * Copyright (c) 2013, 360buy Group and/or its affiliates. All rights reserved.
  */
-package com.wsun.seap.dao.context;
+package com.wsun.seap.common.context;
 
 import java.util.HashMap;
 import java.util.Map;

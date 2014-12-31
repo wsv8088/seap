@@ -23,5 +23,4 @@
 
     <!-- 支持缓存注解 -->
     <cache:annotation-driven cache-manager="cacheManager"/>
-
 </beans>

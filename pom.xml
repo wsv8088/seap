@@ -50,6 +50,9 @@
         <aopalliance.version>1.0</aopalliance.version>
         <downloadSources>false</downloadSources>
 
+        <ehcache.version>2.6.6</ehcache.version>
+        <ehcache.spring.annotation.version>1.2.0</ehcache.spring.annotation.version>
+
     </properties>
 
     <dependencyManagement>
@@ -140,6 +143,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 
@@ -287,6 +296,19 @@
                 <version>${commons-fileupload.version}</version>
             </dependency>
             <!-- Apache fileupload end -->
+
+            <!-- Ehcache begin -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+                <artifactId>ehcache-spring-annotations</artifactId>
+                <version>${ehcache.spring.annotation.version}</version>
+            </dependency>
+
 
             <!-- JUnit begin -->
             <dependency>

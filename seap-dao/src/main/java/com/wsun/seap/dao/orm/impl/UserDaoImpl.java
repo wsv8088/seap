@@ -1,10 +1,11 @@
 package com.wsun.seap.dao.orm.impl;
 
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.dao.common.MyBatisBaseDao;
 import com.wsun.seap.dao.context.Page;
-import com.wsun.seap.dao.context.QueryParam;
 import com.wsun.seap.dao.orm.UserDao;
 import com.wsun.seap.domain.po.system.User;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,6 +28,10 @@ public class UserDaoImpl extends MyBatisBaseDao implements UserDao {
 	@Override
 	public User queryUser (QueryParam param) {
 		return queryForObject("queryUser", param);
+	}
+
+	public User queryUserByLoginName(String loginName) {
+		return queryForObject("queryUserByLoginName", loginName);
 	}
 
 	@Override

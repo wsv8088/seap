@@ -5,8 +5,7 @@
  */
 package com.wsun.seap.dao.interceptor;
 
-import com.wsun.seap.dao.context.Page;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -21,6 +20,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -39,31 +40,36 @@ public class PaginationInterceptor extends BaseInterceptor {
 
 	@Override
 	public Object intercept (Invocation invocation) throws Throwable {
+		// 获取映射的语句
 		final MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[MAPPED_STATEMENT_INDEX];
 		// 拦截需要分页的SQL
-		Object parameter = invocation.getArgs()[PARAMETER_INDEX];
-		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
-
-		Object parameterObject = boundSql.getParameterObject();
-
-		// 获取分页参数对象
-		QueryParam queryParam = null;
-		if (parameterObject != null) {
-			queryParam = convertParameter(parameterObject);
+		// 获取查询方法的参数
+		Object parameterObj = invocation.getArgs()[PARAMETER_INDEX];
+		// 判断参数类型是否为QueryParam
+		Object parameter;
+		if (parameterObj instanceof QueryParam) {
+			// 如果传入的参数是自定义的QueryParam,须将参数重新设置为Map类型
+			parameter = ((QueryParam) parameterObj).getAllParam();
+			invocation.getArgs()[PARAMETER_INDEX] = parameter;
+		} else {
+			parameter = parameterObj;
 		}
-		// 如果设置了分页对象，则进行分页
-		if (queryParam != null) {
-			if (StringUtils.isBlank(boundSql.getSql())) {
-				return null;
-			}
-			String originalSql = boundSql.getSql().trim();
 
+		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
+		if (StringUtils.isBlank(boundSql.getSql())) {
+			return null;
+		}
+		// 获取分页参数对象RowBounds
+		RowBounds rowBounds = (RowBounds) invocation.getArgs()[ROWBOUNDS_INDEX];
+		// 如果设置了分页对象，则进行分页
+		if (rowBounds != null && rowBounds != RowBounds.DEFAULT) {
+			String originalSql = boundSql.getSql().trim();
 			// 获取物理分页sql
-			String pageSql = dialect.getLimitString(originalSql, queryParam.getPageNo(), queryParam.getPageSize());
+			String pageSql = dialect.getLimitString(originalSql, rowBounds.getOffset(), rowBounds.getLimit());
 			invocation.getArgs()[ROWBOUNDS_INDEX] = new RowBounds(RowBounds.NO_ROW_OFFSET, RowBounds.NO_ROW_LIMIT);
 			BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), pageSql, boundSql.getParameterMappings(), boundSql.getParameterObject());
 			MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql));
-			invocation.getArgs()[0] = newMs;
+			invocation.getArgs()[MAPPED_STATEMENT_INDEX] = newMs;
 		}
 		return invocation.proceed();
 	}

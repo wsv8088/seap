@@ -8,6 +8,7 @@ package com.wsun.seap.web.security.filter;
 import com.wsun.seap.web.security.token.UsernamePasswordToken;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,6 @@ import javax.servlet.ServletResponse;
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
 	public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
-
 	@Override
 	protected AuthenticationToken createToken (ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);

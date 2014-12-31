@@ -46,4 +46,11 @@
 		<include refid="condition"/>
 	</select>
 
+	<select id="queryUserByLoginName" parameterType="java.lang.String"
+			resultType="com.wsun.seap.domain.po.system.User">
+		SELECT
+		<include refid="columns"/>
+		FROM sys_user WHERE login_name = #{loginName,jdbcType=VARCHAR}
+	</select>
+
 </mapper>

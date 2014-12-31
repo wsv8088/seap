@@ -2,11 +2,12 @@ package com.wsun.seap.dao.common;
 
 import com.wsun.seap.common.exception.db.DbException;
 import com.wsun.seap.dao.context.Page;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.dao.interceptor.SQLHelper;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,9 +94,10 @@ public abstract class MyBatisBaseDao extends SqlSessionDaoSupport {
 	public <T> Page<T> queryForPage (String classMethod, QueryParam queryParam) {
 		Page<T> page = new Page<T>();
 		try {
-			List<T> list = this.getSqlSession().selectList(getNamespace() + DELIMITER + classMethod, queryParam);
+			List<T> list = this.getSqlSession().selectList(getNamespace() + DELIMITER + classMethod, queryParam,
+					new RowBounds(queryParam.getPageNo(), queryParam.getPageSize()));
 			page.setRows(list);
-			int total = selectCount(classMethod, queryParam);
+			int total = selectCount(classMethod, queryParam.getAllParam());
 			page.setTotal(total);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

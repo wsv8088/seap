@@ -6,9 +6,8 @@
 package com.wsun.seap.dao.interceptor;
 
 import com.wsun.seap.common.utils.ReflectionsUtil;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.dao.dialect.db.MySQLDialect;
-import com.wsun.seap.dao.context.Page;
 import com.wsun.seap.dao.dialect.Dialect;
 import com.wsun.seap.dao.dialect.db.OracleDialect;
 import org.apache.commons.logging.Log;
@@ -59,7 +58,7 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
 				return qp;
 			} else {
 				// 转换处理
-				return new QueryParam();
+				return (QueryParam) ReflectionsUtil.getFieldValue(parameterObject, "queryParam");
 			}
 		} catch (Exception e) {
 			return null;

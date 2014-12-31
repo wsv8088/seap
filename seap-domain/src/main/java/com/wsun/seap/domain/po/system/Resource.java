@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Created by dbwangshuang on 2014/12/17.
  */
-public class Menu extends BaseEntity {
+public class Resource extends BaseEntity {
 
-	private Menu parent;    // 父级菜单
+	private Resource parent;    // 父级菜单
 
-	private String parentIds; // 所有父级编号
+	private Integer resType; // 资源类型
 
 	private String name;    // 名称
 
@@ -28,6 +28,6 @@ public class Menu extends BaseEntity {
 
 	private String permission; // 权限标识
 
-	private List<Menu> childList = new ArrayList<Menu>();// 拥有子菜单列表
+	private List<Resource> childList = new ArrayList<Resource>();// 拥有子菜单列表
 
 }

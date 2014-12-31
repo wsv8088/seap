@@ -1,7 +1,6 @@
 package mybatis;
 
-import com.wsun.seap.dao.context.Page;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.dao.orm.UserDao;
 import com.wsun.seap.domain.po.system.User;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +17,12 @@ public class TestMybatis {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-config.xml");
         UserDao userDao = (UserDao) ctx.getBean("userDao");
-        Page<User> pageUsers = userDao.queryPageUsers(new QueryParam());
-        System.out.println(pageUsers.getRows().size());
+        QueryParam qp = new QueryParam();
+        qp.addParam("loginName", "ws");
+        qp.addParam("rows", 10);
+
+        List<User> pageUsers = userDao.queryAllUsers(qp);
+
+        System.out.println(pageUsers.size());
     }
 }

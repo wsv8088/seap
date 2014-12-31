@@ -6,7 +6,7 @@
 package com.wsun.seap.web.security.realm;
 
 import com.wsun.seap.common.constant.SystemConst;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.domain.po.system.User;
 import com.wsun.seap.service.system.UserService;
 import com.wsun.seap.web.security.token.UsernamePasswordToken;
@@ -48,9 +48,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 因为在登录的时候构建的是自定义的token,因此此处可转换为对应的类
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 		String username = token.getUsername();
-		QueryParam param = new QueryParam();
 
-		User user = userService.queryUser(param);
+		User user = userService.queryUserByLoginName(username);
 		if (user != null) {
 			return new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());
 		} else {

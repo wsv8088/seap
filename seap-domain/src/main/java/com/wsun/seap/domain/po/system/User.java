@@ -1,7 +1,5 @@
 package com.wsun.seap.domain.po.system;
 
-import java.util.Date;
-
 /**
  * Created by Administrator on 2014/10/5 0005.
  */

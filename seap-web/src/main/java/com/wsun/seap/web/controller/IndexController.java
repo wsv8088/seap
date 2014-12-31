@@ -16,7 +16,9 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index () {
-		logger.debug(SecurityUtils.getSubject().getPrincipal() + "登录成功，进入主页面=================>");
+		String userName = (String) SecurityUtils.getSubject().getPrincipal();
+		logger.info(userName + "登录成功，进入主页面=================>");
+
 		return "modules/main";
 	}
 

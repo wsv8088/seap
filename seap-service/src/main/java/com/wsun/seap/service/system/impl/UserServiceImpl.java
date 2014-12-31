@@ -1,7 +1,7 @@
 package com.wsun.seap.service.system.impl;
 
 import com.wsun.seap.dao.context.Page;
-import com.wsun.seap.dao.context.QueryParam;
+import com.wsun.seap.common.context.QueryParam;
 import com.wsun.seap.dao.orm.UserDao;
 import com.wsun.seap.domain.po.system.User;
 import com.wsun.seap.service.system.UserService;
@@ -30,7 +30,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User queryUser (QueryParam param) {
-		return userDao.queryUser(param);
+	public User queryUserByLoginName (String loginName) {
+		return userDao.queryUserByLoginName(loginName);
 	}
+
+
 }
