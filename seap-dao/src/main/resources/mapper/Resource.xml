@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="System.Resource">
+
+	<resultMap id="resourceResultMap" type="com.wsun.seap.domain.po.system.Resource">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+		<result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+		<result property="resType" column="res_type" jdbcType="INTEGER"/>
+		<result property="href" column="href" jdbcType="VARCHAR"/>
+		<result property="target" column="target" jdbcType="VARCHAR"/>
+		<result property="icon" column="icon" jdbcType="VARCHAR"/>
+		<result property="sort" column="sort" jdbcType="INTEGER"/>
+		<result property="isShow" column="is_show" jdbcType="VARCHAR"/>
+		<result property="isSyncWorkflow" column="is_sync_workflow" jdbcType="VARCHAR"/>
+		<result property="permission" column="permission" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="columns">
+		  id, parent_id, res_type, href, target,
+		  icon, sort, is_show, is_sync_workflow, permission,
+		  create_by, create_date,
+		  update_by, update_date, remarks, yn
+	</sql>
+	
+	<sql id="condition">
+		<where>
+			<if test = "loginName != null and loginName != ''">
+				login_name = #{loginName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryUserList" parameterType="com.wsun.seap.domain.po.system.User"
+			resultMap="userResultMap" useCache="true">
+		SELECT
+			<include refid="columns"/>
+		FROM sys_user
+		<include refid="condition"/>
+	</select>
+
+	<select id="queryUser" parameterType="com.wsun.seap.domain.po.system.User"
+			resultType="com.wsun.seap.domain.po.system.User">
+		SELECT
+		<include refid="columns"/>
+		FROM sys_user
+		<include refid="condition"/>
+	</select>
+
+</mapper>

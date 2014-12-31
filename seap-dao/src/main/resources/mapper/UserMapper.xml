@@ -5,7 +5,7 @@
 <mapper namespace="System.UserMapper">
 
 	<resultMap id="userResultMap" type="com.wsun.seap.domain.po.system.User">
-		<result property="id" column="ID" jdbcType="BIGINT"/>
+		<result property="id" column="ID" jdbcType="INTEGER"/>
 		<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
 		<result property="password" column="password" jdbcType="VARCHAR"/>
 		<result property="realName" column="real_name" jdbcType="VARCHAR"/>

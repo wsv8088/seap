@@ -8,7 +8,9 @@ import java.util.List;
  */
 public class Resource extends BaseEntity {
 
-	private Resource parent;    // 父级菜单
+	private Integer id;
+
+	private Integer parentId;    // 父级菜单
 
 	private Integer resType; // 资源类型
 
@@ -24,10 +26,96 @@ public class Resource extends BaseEntity {
 
 	private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
 
-	private String isActiviti;    // 是否同步到工作流（1：同步；0：不同步）
+	private String isSyncWorkflow;    // 是否同步到工作流（1：同步；0：不同步）
 
 	private String permission; // 权限标识
 
-	private List<Resource> childList = new ArrayList<Resource>();// 拥有子菜单列表
+	public Integer getId () {
+		return id;
+	}
 
+	public void setId (Integer id) {
+		this.id = id;
+	}
+
+	public Integer getParentId () {
+		return parentId;
+	}
+
+	public void setParentId (Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public Integer getResType () {
+		return resType;
+	}
+
+	public void setResType (Integer resType) {
+		this.resType = resType;
+	}
+
+	public String getName () {
+		return name;
+	}
+
+	public void setName (String name) {
+		this.name = name;
+	}
+
+	public String getHref () {
+		return href;
+	}
+
+	public void setHref (String href) {
+		this.href = href;
+	}
+
+	public String getTarget () {
+		return target;
+	}
+
+	public void setTarget (String target) {
+		this.target = target;
+	}
+
+	public String getIcon () {
+		return icon;
+	}
+
+	public void setIcon (String icon) {
+		this.icon = icon;
+	}
+
+	public Integer getSort () {
+		return sort;
+	}
+
+	public void setSort (Integer sort) {
+		this.sort = sort;
+	}
+
+	public String getIsShow () {
+		return isShow;
+	}
+
+	public void setIsShow (String isShow) {
+		this.isShow = isShow;
+	}
+
+
+	public String getIsSyncWorkflow () {
+		return isSyncWorkflow;
+	}
+
+	public void setIsSyncWorkflow (String isSyncWorkflow) {
+		this.isSyncWorkflow = isSyncWorkflow;
+	}
+
+	public String getPermission () {
+		return permission;
+	}
+
+	public void setPermission (String permission) {
+		this.permission = permission;
+	}
 }
