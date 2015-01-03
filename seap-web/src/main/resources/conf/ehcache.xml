@@ -14,6 +14,7 @@
     diskPersistent:是否disk store在虚拟机启动时持久化。默认为false
     diskExpiryThreadIntervalSeconds:运行disk终结线程的时间，默认为120秒
     service 缓存配置 -->
+    <diskStore path="D:\cache"/>
 
     <defaultCache
             maxElementsInMemory="10000"

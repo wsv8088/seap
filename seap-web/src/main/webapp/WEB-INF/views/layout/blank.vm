@@ -10,16 +10,10 @@
     <title>Legend</title>
 </head>
 <body>
-<div class="container">
-    <div id="header">
-        #parse("/layout/header.vm")
+    <div class="container">
+        <div id="body" style="margin: 40px;min-height: 700px;">
+            $screen_content
+        </div>
     </div>
-    <div id="body" style="margin: 40px;min-height: 700px;">
-        $screen_content
-    </div>
-    <div id="bottom">
-        #parse("/layout/bottom.vm")
-    </div>
-</div>
 </body>
 </html>

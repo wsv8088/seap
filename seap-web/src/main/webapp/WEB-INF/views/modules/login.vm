@@ -1,26 +1,27 @@
-#set($layout="layout/main.vm")
-<form id="loginForm" action="#springUrl('login')" method="post" class="form-horizontal">
-    <div class="control-group">
-        <label for="username" class="control-label">名称:</label>
+<div>
+    <form id="loginForm" action="#springUrl('login')" method="post" class="form-horizontal">
+        <div class="control-group">
+            <label for="username" class="control-label">名称:</label>
 
-        <div class="controls">
-            <input type="text" id="username" name="username"
-                   class="input-medium required"/>
+            <div class="controls">
+                <input type="text" id="username" name="username"
+                       class="input-medium required"/>
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label for="password" class="control-label">密码:</label>
+        <div class="control-group">
+            <label for="password" class="control-label">密码:</label>
 
-        <div class="controls">
-            <input type="password" id="password" name="password" class="input-medium required"/>
+            <div class="controls">
+                <input type="password" id="password" name="password" class="input-medium required"/>
+            </div>
         </div>
-    </div>
 
-    <div class="control-group">
-        <div class="controls">
-            <label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/>
-                记住我</label>
-            <input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/>
+                    记住我</label>
+                <input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

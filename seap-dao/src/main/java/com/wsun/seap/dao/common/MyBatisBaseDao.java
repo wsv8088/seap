@@ -22,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2014/10/5 0005.
@@ -81,7 +82,7 @@ public abstract class MyBatisBaseDao extends SqlSessionDaoSupport {
 		return result;
 	}
 
-	public <T> List<T> queryAll (String classMethod, Object param) {
+	public <T> List<T> queryForList (String classMethod, Object param) {
 		List<T> list = null;
 		try {
 			list = this.getSqlSession().selectList(getNamespace() + DELIMITER + classMethod, param);

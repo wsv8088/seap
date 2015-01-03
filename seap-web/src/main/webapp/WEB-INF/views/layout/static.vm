@@ -1,4 +1,6 @@
 <!--在这里可以导入静态资源-->
+<!-- 解决favicon.ico不显示问题 -->
+<link type="image/x-icon" href="#springUrl('/static/images/favicon.ico')" rel="shortcut icon">
 <!-- 导入样式 -->
 <link rel="stylesheet" href="#springUrl('/static/bootstrap/css/bootstrap.min.css')" type="text/css"/>
 <link rel="stylesheet" href="#springUrl('/static/bootstrap/css/bootstrap-theme.min.css')" type="text/css"/>
@@ -6,3 +8,4 @@
 <!-- 导入js脚本 -->
 <script type="text/javascript" src="#springUrl('/static/bootstrap/js/bootstrap.min.js')"></script>
 <script type="text/javascript" src="#springUrl('/static/jquery/jquery-1.9.1.min.js')"></script>
+

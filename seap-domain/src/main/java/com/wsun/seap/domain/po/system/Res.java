@@ -6,9 +6,7 @@ import java.util.List;
 /**
  * Created by dbwangshuang on 2014/12/17.
  */
-public class Resource extends BaseEntity {
-
-	private Integer id;
+public class Res extends BaseEntity {
 
 	private Integer parentId;    // 父级菜单
 
@@ -29,14 +27,6 @@ public class Resource extends BaseEntity {
 	private String isSyncWorkflow;    // 是否同步到工作流（1：同步；0：不同步）
 
 	private String permission; // 权限标识
-
-	public Integer getId () {
-		return id;
-	}
-
-	public void setId (Integer id) {
-		this.id = id;
-	}
 
 	public Integer getParentId () {
 		return parentId;

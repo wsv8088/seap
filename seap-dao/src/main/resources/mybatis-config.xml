@@ -44,16 +44,25 @@
 
     </settings>
 
+    <!-- 引用别名定义 -->
+    <typeAliases>
+        <typeAlias alias="User" type="com.wsun.seap.domain.po.system.User"></typeAlias>
+        <typeAlias alias="Role" type="com.wsun.seap.domain.po.system.Role"></typeAlias>
+        <typeAlias alias="Res" type="com.wsun.seap.domain.po.system.Res"></typeAlias>
+    </typeAliases>
 
     <!-- 插件配置 -->
     <plugins>
-        <plugin interceptor="com.wsun.seap.dao.interceptor.PaginationInterceptor">
-        </plugin>
-
+        <plugin interceptor="com.wsun.seap.dao.interceptor.PaginationInterceptor"/>
     </plugins>
 
     <mappers>
+        <!-- 导入基础映射包,以便可以直接继承 -->
+        <mapper resource="mapper/BaseMapper.xml"/>
+
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/ResourceMapper.xml"/>
+        <mapper resource="mapper/RoleMapper.xml"/>
     </mappers>
 
 </configuration>

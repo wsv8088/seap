@@ -23,4 +23,11 @@
 
     <!-- 支持缓存注解 -->
     <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <!-- 自定义cache -->
+    <bean id="cache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="cacheName" value="cache"/>
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+
 </beans>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="System.RoleMapper">
+
+	<resultMap id="roleResultMap" type="Role" extends="BaseMapper.baseResultMap">
+		<result property="officeId" column="office_id" jdbcType="INTEGER"/>
+		<result property="description" column="description" jdbcType="VARCHAR"/>
+		<result property="email" column="email" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 查询列定义 -->
+	<sql id="columns">
+		  id, name, description, create_by, create_date,
+		  update_by, update_date, remarks, yn
+	</sql>
+
+	<!-- 过滤条件定义 -->
+	<sql id="condition">
+		<where>
+			<if test = "name != null and name != ''">
+				name = #{name,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询角色列表 -->
+	<select id="queryRoleList" parameterType="Role"
+			resultMap="roleResultMap">
+		SELECT
+			<include refid="columns"/>
+		FROM sys_role
+		<include refid="condition"/>
+	</select>
+
+	<!-- 根据条件查询单个角色 -->
+	<select id="queryRole" parameterType="Role" resultMap="roleResultMap">
+		SELECT
+		<include refid="columns"/>
+		FROM sys_role
+		<include refid="condition"/>
+	</select>
+
+	<!-- 根据用户名查询该用户所拥有的角色 -->
+	<select id="queryRoleListByUsername" parameterType="java.lang.String"
+			resultMap="roleResultMap">
+		SELECT r.id, r.name, r.description
+		  FROM sys_role r INNER JOIN sys_user_role ur
+			ON ur.role_id = r.id INNER JOIN sys_user u
+			ON u.id = ur.user_id
+		 WHERE u.yn = 0 AND r.yn = 0 AND ur.yn = 0
+		   AND u.login_name = #{loginName,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

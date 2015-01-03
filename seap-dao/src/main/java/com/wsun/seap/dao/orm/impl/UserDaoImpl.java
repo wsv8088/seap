@@ -17,7 +17,7 @@ import java.util.List;
 public class UserDaoImpl extends MyBatisBaseDao implements UserDao {
 	@Override
 	public List<User> queryAllUsers (QueryParam param) {
-		return queryAll("queryUserList", param);
+		return queryForList("queryUserList", param);
 	}
 
 	@Override
@@ -30,6 +30,8 @@ public class UserDaoImpl extends MyBatisBaseDao implements UserDao {
 		return queryForObject("queryUser", param);
 	}
 
+	@Cacheable(value = "cache", key = "")
+	@Override
 	public User queryUserByLoginName(String loginName) {
 		return queryForObject("queryUserByLoginName", loginName);
 	}

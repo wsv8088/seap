@@ -7,12 +7,17 @@ package com.wsun.seap.web.security.realm;
 
 import com.wsun.seap.common.constant.SystemConst;
 import com.wsun.seap.common.context.QueryParam;
+import com.wsun.seap.domain.po.system.Res;
+import com.wsun.seap.domain.po.system.Role;
 import com.wsun.seap.domain.po.system.User;
+import com.wsun.seap.service.system.ResourceService;
+import com.wsun.seap.service.system.RoleService;
 import com.wsun.seap.service.system.UserService;
 import com.wsun.seap.web.security.token.UsernamePasswordToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
@@ -22,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 系统安全认证实现类
@@ -35,6 +41,12 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	@Resource
 	private UserService userService;
+
+	@Resource
+	private ResourceService resourceService;
+
+	@Resource
+	private RoleService roleService;
 
 	@Resource
 	private CacheManager cacheManager;
@@ -63,9 +75,22 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo (PrincipalCollection principals) {
-		String userName = (String) principals.getPrimaryPrincipal();
+		String username = (String) principals.getPrimaryPrincipal();
 
-		return null;
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		// 查询该用户所拥有的资源
+		List<Res> resources = resourceService.queryResourcesByUsername(username);
+		for (Res res : resources) {
+			info.addStringPermission(res.getPermission());
+		}
+
+		// 查询该用户所拥有的角色
+		List<Role> roles = roleService.queryRoleByUsername(username);
+		for (Role role : roles) {
+			info.addRole(role.getName());
+		}
+
+		return info;
 	}
 
 	/**

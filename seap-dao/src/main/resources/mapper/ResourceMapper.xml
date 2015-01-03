@@ -2,10 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="System.Resource">
+<mapper namespace="System.ResourceMapper">
 
-	<resultMap id="resourceResultMap" type="com.wsun.seap.domain.po.system.Resource">
-		<result property="id" column="id" jdbcType="INTEGER"/>
+	<resultMap id="resourceResultMap" type="Res" extends="BaseMapper.baseResultMap">
 		<result property="parentId" column="parent_id" jdbcType="INTEGER"/>
 		<result property="resType" column="res_type" jdbcType="INTEGER"/>
 		<result property="href" column="href" jdbcType="VARCHAR"/>
@@ -16,36 +15,44 @@
 		<result property="isSyncWorkflow" column="is_sync_workflow" jdbcType="VARCHAR"/>
 		<result property="permission" column="permission" jdbcType="VARCHAR"/>
 	</resultMap>
-	
+
+	<!-- 查询列定义 -->
 	<sql id="columns">
 		  id, parent_id, res_type, href, target,
 		  icon, sort, is_show, is_sync_workflow, permission,
 		  create_by, create_date,
 		  update_by, update_date, remarks, yn
 	</sql>
-	
+
+	<!-- 过滤条件定义 -->
 	<sql id="condition">
 		<where>
-			<if test = "loginName != null and loginName != ''">
-				login_name = #{loginName,jdbcType=VARCHAR}
+			<if test = "resType != null and resType != ''">
+				res_type = #{resType,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</sql>
 
-	<select id="queryUserList" parameterType="com.wsun.seap.domain.po.system.User"
-			resultMap="userResultMap" useCache="true">
+	<!-- 查询资源列表 -->
+	<select id="queryResourceList" parameterType="Res"
+			resultMap="resourceResultMap">
 		SELECT
 			<include refid="columns"/>
-		FROM sys_user
+		FROM sys_resource
 		<include refid="condition"/>
 	</select>
 
-	<select id="queryUser" parameterType="com.wsun.seap.domain.po.system.User"
-			resultType="com.wsun.seap.domain.po.system.User">
-		SELECT
-		<include refid="columns"/>
-		FROM sys_user
-		<include refid="condition"/>
+	<!-- 根据用户名查询用户所拥有的资源 -->
+	<select id="queryResourceListByUsername" parameterType="java.lang.String"
+			resultMap="resourceResultMap">
+		SELECT s.id, s.name, s.parent_id, s.href, s.res_type, s.icon
+		  FROM sys_resource s INNER JOIN sys_role_resource rr
+			ON rr.resource_id = s.id INNER JOIN sys_role r
+			ON r.id = rr.role_id INNER JOIN sys_user_role ur
+			ON ur.role_id = r.id INNER JOIN sys_user u
+			ON u.id = ur.user_id
+		 WHERE u.yn = 0 AND s.yn = 0 AND rr.yn = 0 AND r.yn = 0 AND ur.yn = 0
+		   AND u.login_name = #{loginName,jdbcType=VARCHAR}
 	</select>
 
 </mapper>

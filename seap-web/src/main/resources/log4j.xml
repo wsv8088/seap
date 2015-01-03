@@ -62,7 +62,7 @@
     </appender>
 
     <category name="com.wsun.seap" additivity="true">
-        <priority value="INFO"/>
+        <priority value="DEBUG"/>
         <appender-ref ref="EXCEPTION"/>
         <appender-ref ref="DEBUG"/>
         <appender-ref ref="INFO"/>
