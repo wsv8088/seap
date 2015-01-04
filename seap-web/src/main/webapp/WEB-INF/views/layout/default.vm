@@ -2,25 +2,82 @@
 <html>
 <head>
     <title>seap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="Cache-Control" content="no-store"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
     #parse("/layout/static.vm")
-    <title>Legend</title>
+    <title>seap</title>
 </head>
 <body>
-<div class="container">
-    <div id="header">
-        #parse("/layout/header.vm")
+    #parse("/layout/header.vm")
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success">
+                        <i class="icon-signal"></i>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <i class="icon-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-warning">
+                        <i class="icon-group"></i>
+                    </button>
+
+                    <button class="btn btn-danger">
+                        <i class="icon-cogs"></i>
+                    </button>
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-danger"></span>
+                </div>
+            </div>
+            <!-- #sidebar-shortcuts -->
+
+            #parse("/layout/menu.vm")
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+            </div>
+
+        </div>
+
+
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    $screen_content
+                    <!-- PAGE CONTENT ENDS -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.page-content -->
+
     </div>
-    <div id="body" style="margin: 40px;min-height: 700px;">
-        $screen_content
-    </div>
-    <div id="bottom">
-        #parse("/layout/bottom.vm")
-    </div>
+    <!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
 </div>
+    #parse("/layout/bottom.vm")
 </body>
 </html>
