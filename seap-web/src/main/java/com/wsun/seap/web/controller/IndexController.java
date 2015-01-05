@@ -6,16 +6,16 @@ import com.wsun.seap.domain.po.system.User;
 import com.wsun.seap.service.system.ResourceService;
 import com.wsun.seap.service.system.RoleService;
 import com.wsun.seap.service.system.UserService;
+import com.wsun.seap.web.context.LoginContext;
+import com.wsun.seap.web.security.realm.SystemAuthorizingRealm;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -39,29 +39,25 @@ public class IndexController {
     @Resource
     private CacheManager cacheManager;
 
-    @RequestMapping(value = "/index/head", method = RequestMethod.GET)
-    public String queryUserInfo(Model model) {
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        List<Role> roles = roleService.queryRoleByUsername(username);
-        model.addAttribute("roles", roles);
+    @RequestMapping(value = "/index/head", method = RequestMethod.POST)
+    public String queryRole(Model model) {
+        User currentUser = LoginContext.getUser();
+        String username = currentUser.getLoginName();
+        logger.info(username + "获取当前用户基本信息,信息用于header显示=================>");
+        model.addAttribute("user", currentUser);
         return "module/menu";
     }
 
-    @RequestMapping(value = "/index/menu", method = RequestMethod.GET)
+    @RequestMapping(value = "/index/menu", method = RequestMethod.POST)
     public String queryMenuList(Model model) {
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        List<Res> resources = resourceService.queryResourcesByUsername(username);
-        model.addAttribute("reslist", resources);
+        List<Res> resList = LoginContext.getMenuList();
+        logger.info("读取当前用户的权限菜单,共" + resList + "条");
         return "module/menu";
     }
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        logger.info(username + "登录成功，进入主页面=================>");
-        User user = userService.queryUserByLoginName(username);
-        model.addAttribute("userinfo", user);
 
         return "modules/main";
     }
