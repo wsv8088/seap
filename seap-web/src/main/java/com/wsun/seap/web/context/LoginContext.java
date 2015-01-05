@@ -23,6 +23,7 @@ public class LoginContext {
         Subject subject = SecurityUtils.getSubject();
         String username = (String) subject.getPrincipal();
         if (cache.get(username) == null) {
+
         }
         return null;
     }

@@ -39,6 +39,22 @@ public class IndexController {
     @Resource
     private CacheManager cacheManager;
 
+    @RequestMapping(value = "/index/head", method = RequestMethod.GET)
+    public String queryUserInfo(Model model) {
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        List<Role> roles = roleService.queryRoleByUsername(username);
+        model.addAttribute("roles", roles);
+        return "module/menu";
+    }
+
+    @RequestMapping(value = "/index/menu", method = RequestMethod.GET)
+    public String queryMenuList(Model model) {
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        List<Res> resources = resourceService.queryResourcesByUsername(username);
+        model.addAttribute("reslist", resources);
+        return "module/menu";
+    }
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
@@ -46,12 +62,6 @@ public class IndexController {
         logger.info(username + "登录成功，进入主页面=================>");
         User user = userService.queryUserByLoginName(username);
         model.addAttribute("userinfo", user);
-
-        List<Res> resources = resourceService.queryResourcesByUsername(username);
-        model.addAttribute("reslist", resources);
-
-        List<Role> roles = roleService.queryRoleByUsername(username);
-        model.addAttribute("roles", roles);
 
         return "modules/main";
     }
