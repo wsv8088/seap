@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,19 +41,20 @@ public class IndexController {
     private CacheManager cacheManager;
 
     @RequestMapping(value = "/index/head", method = RequestMethod.POST)
-    public String queryRole(Model model) {
+    @ResponseBody
+    public User queryRole(Model model) {
         User currentUser = LoginContext.getUser();
         String username = currentUser.getLoginName();
         logger.info(username + "获取当前用户基本信息,信息用于header显示=================>");
-        model.addAttribute("user", currentUser);
-        return "module/menu";
+        return currentUser;
     }
 
     @RequestMapping(value = "/index/menu", method = RequestMethod.POST)
-    public String queryMenuList(Model model) {
+    @ResponseBody
+    public List<Res> queryMenuList(Model model) {
         List<Res> resList = LoginContext.getMenuList();
-        logger.info("读取当前用户的权限菜单,共" + resList + "条");
-        return "module/menu";
+        logger.info("读取当前用户的权限菜单,共" + resList.size() + "条");
+        return resList;
     }
 
 

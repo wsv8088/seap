@@ -233,7 +233,7 @@
                         <img class="nav-user-photo" src="/static/ace/avatars/user.jpg" alt="Jason's Photo"/>
 								<span class="user-info">
 									<small>欢迎光临,</small>
-                                    $!{user.realName}
+                                    <span id="currentUsername"></span>
 								</span>
 
                         <i class="icon-caret-down"></i>
@@ -271,12 +271,16 @@
     </div>
     <!-- /.container -->
 </div>
-<form id="loginform" class="form-vertical" action="#springUrl('')/index/head" method="post">
-</form>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#loginForm").submit();
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/index/head",
+            success: function (data) {
+                $("#currentUsername").html(data.realName);
+            }
+        });
     });
 
 </script>
