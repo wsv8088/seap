@@ -11,15 +11,16 @@
 		<result property="target" column="target" jdbcType="VARCHAR"/>
 		<result property="icon" column="icon" jdbcType="VARCHAR"/>
 		<result property="sort" column="sort" jdbcType="INTEGER"/>
-		<result property="isShow" column="is_show" jdbcType="VARCHAR"/>
-		<result property="isSyncWorkflow" column="is_sync_workflow" jdbcType="VARCHAR"/>
+		<result property="isShow" column="is_show" jdbcType="INTEGER"/>
+		<result property="isLeaf" column="is_leaf" jdbcType="INTEGER"/>
+		<result property="isSyncWorkflow" column="is_sync_workflow" jdbcType="INTEGER"/>
 		<result property="permission" column="permission" jdbcType="VARCHAR"/>
 	</resultMap>
 
 	<!-- 查询列定义 -->
 	<sql id="columns">
 		  id, parent_id, res_type, href, target,
-		  icon, sort, is_show, is_sync_workflow, permission,
+		  icon, sort, is_show, is_leaf, is_sync_workflow, permission,
 		  create_by, create_date,
 		  update_by, update_date, remarks, yn
 	</sql>

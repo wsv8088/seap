@@ -24,6 +24,8 @@ public class Res extends BaseEntity {
 
 	private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
 
+	private Integer isLeaf; // 是否是叶子节点
+
 	private String isSyncWorkflow;    // 是否同步到工作流（1：同步；0：不同步）
 
 	private String permission; // 权限标识
@@ -92,6 +94,13 @@ public class Res extends BaseEntity {
 		this.isShow = isShow;
 	}
 
+	public Integer getIsLeaf () {
+		return isLeaf;
+	}
+
+	public void setIsLeaf (Integer isLeaf) {
+		this.isLeaf = isLeaf;
+	}
 
 	public String getIsSyncWorkflow () {
 		return isSyncWorkflow;
@@ -109,3 +118,5 @@ public class Res extends BaseEntity {
 		this.permission = permission;
 	}
 }
+
+

@@ -50,9 +50,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Resource
     private RoleService roleService;
 
-    @Resource
-    private CacheManager cacheManager;
-
     /**
      * 认证回调函数, 登录时调用
      */
@@ -105,6 +102,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         // setCredentialsMatcher(matcher);
     }
 
+    // 内部类用以绑定当前subject
     public static class Principal implements Serializable {
 
         private Long id;
@@ -113,6 +111,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
         private String realName;
 
+        // 绑定当前用户的缓存数据,定义map类型比较灵活
         private Map<String, Object> cacheMap;
 
         public Principal(User user) {
