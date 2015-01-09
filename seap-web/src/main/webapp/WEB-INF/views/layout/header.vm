@@ -233,7 +233,7 @@
                         <img class="nav-user-photo" src="/static/ace/avatars/user.jpg" alt="Jason's Photo"/>
 								<span class="user-info">
 									<small>欢迎光临,</small>
-                                    <span id="currentUsername"></span>
+                                    $!user.realName
 								</span>
 
                         <i class="icon-caret-down"></i>
@@ -271,18 +271,3 @@
     </div>
     <!-- /.container -->
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        $.ajax({
-            type: "POST",
-            url: "/index/head",
-            success: function (data) {
-                $("#currentUsername").html(data.realName);
-            }
-        });
-    });
-
-</script>
-
-

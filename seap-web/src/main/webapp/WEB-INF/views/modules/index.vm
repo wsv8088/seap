@@ -1,0 +1,20 @@
+#parse("/layout/header.vm")
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <!-- 左边栏，包括设置和功能菜单 -->
+		#parse("/layout/sidebar.vm")
+        <!-- 主区域 begin -->
+		#parse("/layout/content.vm")
+        <!-- 主区域 end -->
+    </div>
+
+    <!-- 返回顶部链接 -->
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+#parse("/layout/bottom.vm")

@@ -1,52 +1,8 @@
-<ul class="nav nav-list" id="menulist">
-
-</ul>
-<!-- /.nav-list -->
-
-<script type="text/javascript">
-    <!-- 动态获取当前用户对应的角色所拥有的菜单权限 -->
-    $(function () {
-        $.ajax({
-            type: "POST",
-            url: "/index/menu",
-            success: function (data) {
-                var navObj = $("#menulist");
-                var cnode = "";
-                $(data).each(function (i, node) {
-                    var active = "";
-                    if (i == 0) {
-                        // 默认选取第一行作为活动状态的节点
-                        active = " class='active'";
-                    }
-                    if (node.parentId == "0") {
-                        // 根节点
-                        var level2 = "";
-                        var childNums = 0; // 当前节点的子节点个数,用于判断当前节点的样式
-                        $(data).each(function (j, inner) {
-                            if (inner.parentId == node.id) {
-                                childNums++;
-                                // 附加到父节点上
-                                level2 += "<li><a href='" + inner.href
-                                + "'><i class='icon-double-angle-right'></i>" + inner.name + "</a></li>";
-                            }
-                        });
-                        if (childNums > 0) {
-                            // 该节点有子节点
-                            cnode += "<li" + active + "><a href='#' class='dropdown-toggle'><i class='"
-                            + node.icon + "'></i><span class='menu-text'> " + node.name
-                            + " </span><b class='arrow icon-angle-down'>" +
-                            "</b></a><ul class='submenu'>" + level2 + "</ul></li>";
-                        } else {
-                            // 本身就是叶子节点
-                            cnode += "<li" + active + "><a href='" + inner.href + "'><i class='"
-                            + inner.icon + "'></i><span class='menu-text'>" + inner.name + "</span></a></li>";
-                        }
-                    }
-
-                });
-                navObj.append(cnode);
-            }
-        });
-    });
-
-</script>
+<ul class="nav nav-list">
+    #foreach($p in $menulist)
+        <dt><a href="#" class="curr">$!p.name</a></dt>
+        #foreach($c in $p.children)
+            <dd><a href="iLoadJS.loadPage($c.href)">$menu2.name</a></dd>
+        #end
+    #end
+</ul><!-- /.nav-list -->

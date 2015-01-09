@@ -26,41 +26,40 @@ import java.util.List;
  */
 @Controller
 public class IndexController {
-    private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
+	private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-    @Resource
-    private UserService userService;
+	@RequestMapping(value = "/index/head", method = RequestMethod.GET)
+	public String queryRole (Model model) {
+		User currentUser = LoginContext.getUser();
+		model.addAttribute("user", currentUser);
+		logger.info(currentUser.getLoginName() + "获取当前用户基本信息,信息用于header显示=================>");
+		return "layout/header";
+	}
 
-    @Resource
-    private ResourceService resourceService;
-
-    @Resource
-    private RoleService roleService;
-
-    @Resource
-    private CacheManager cacheManager;
-
-    @RequestMapping(value = "/index/head", method = RequestMethod.POST)
-    @ResponseBody
-    public User queryRole(Model model) {
-        User currentUser = LoginContext.getUser();
-        String username = currentUser.getLoginName();
-        logger.info(username + "获取当前用户基本信息,信息用于header显示=================>");
-        return currentUser;
-    }
-
-    @RequestMapping(value = "/index/menu", method = RequestMethod.POST)
-    @ResponseBody
-    public List<Res> queryMenuList(Model model) {
-        List<Res> resList = LoginContext.getMenuList();
-        logger.info("读取当前用户的权限菜单,共" + resList.size() + "条");
-        return resList;
-    }
+	@RequestMapping(value = "/index/menu", method = RequestMethod.GET)
+	public String queryMenuList (Model model) {
+		List<Res> menulist = LoginContext.getMenuList();
+		model.addAttribute("menulist", menulist);
+		logger.info("读取当前用户的权限菜单,共" + menulist.size() + "条");
+		return "layout/sidebar";
+	}
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model) {
-        return "modules/main";
-    }
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index (Model model) {
+		User currentUser = LoginContext.getUser();
+		logger.info(currentUser.getLoginName() + "成功登录首页=================>");
+		model.addAttribute("user", currentUser);
+		logger.info("读取当前用户信息===================>");
+		List<Res> menulist = LoginContext.getMenuList();
+		model.addAttribute("menulist", menulist);
+		logger.info("读取当前用户的权限菜单,共" + menulist.size() + "条");
+		return "modules/index";
+	}
+
+	@RequestMapping(value = "/index/main", method = RequestMethod.GET)
+	public String main (Model model) {
+		return "modules/main";
+	}
 
 }

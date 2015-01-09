@@ -21,7 +21,8 @@
         <div class="nav-search" id="nav-search">
             <form class="form-search">
 								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"/>
+									<input type="text" placeholder="Search ..." class="nav-search-input"
+                                           id="nav-search-input" autocomplete="off"/>
 									<i class="icon-search nav-search-icon"></i>
 								</span>
             </form>
@@ -29,14 +30,8 @@
         <!-- #nav-search -->
     </div>
 
-    <div class="page-content">
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- PAGE CONTENT BEGINS -->
-                $screen_content
-                <!-- PAGE CONTENT ENDS -->
-            </div>
-        </div>
+    <!-- 业务功能显示区域 -->
+    <div class="page-content" id="page-content">
     </div>
     <!-- /.page-content -->
 </div>
