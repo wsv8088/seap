@@ -17,7 +17,7 @@ var iLoadJS = iLoadJS || {
          * Date:   2014/02/28;
          ---------------------------------------------*/
         loadPage: (function (url, _paramData, _callbackFun) {
-            this.load("page-content", url, _paramData, _callbackFun);
+            $("#page_iframe").get(0).src = url;
         }),
         load: (function (containerId, url, _paramData, _callbackFun) {
             if (!document.getElementById(containerId)) {
@@ -30,7 +30,7 @@ var iLoadJS = iLoadJS || {
             }
             showWaiting();
             $("#" + containerId).load(url, _paramData || null, function (data) {
-                hideWaiting();
+                //hideWaiting();
                 try {
                     if (_callbackFun && typeof(_callbackFun) == "function") {
                         _callbackFun(data);
@@ -43,3 +43,5 @@ var iLoadJS = iLoadJS || {
         })
 
     };
+
+

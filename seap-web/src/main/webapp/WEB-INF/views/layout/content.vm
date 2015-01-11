@@ -32,6 +32,8 @@
 
     <!-- 业务功能显示区域 -->
     <div class="page-content" id="page-content">
+        <iframe id="menuFrame" name="menuFrame"style="overflow:visible;"
+                scrolling="no" frameborder="no" width="100%"></iframe>
     </div>
     <!-- /.page-content -->
 </div>

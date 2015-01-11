@@ -9,6 +9,7 @@
 		#parse("/layout/sidebar.vm")
         <!-- 主区域 begin -->
 		#parse("/layout/content.vm")
+
         <!-- 主区域 end -->
     </div>
 
