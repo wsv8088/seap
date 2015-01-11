@@ -1,8 +1,27 @@
 <ul class="nav nav-list">
     #foreach($p in $menulist)
-        <dt><a href="#" class="curr">$!p.name</a></dt>
-        #foreach($c in $p.children)
-            <dd><a href="iLoadJS.loadPage($c.href)">$menu2.name</a></dd>
+        #if ($p.parentId == 0)
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="${p.icon}"></i>
+                <span class="menu-text">${p.name}</span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                #foreach($c in $menulist)
+                    #if (${c.parentId} == ${p.id})
+                        <li>
+                            <a href="javascript:void(0));"
+                               onclick="iLoadJS.loadPage('${c.href}');>
+                                <i class="icon-double-angle-right"></i>
+                                ${c.name}
+                            </a>
+                        </li>
+                    #end
+                #end
+            </ul>
         #end
+    </li>
     #end
 </ul><!-- /.nav-list -->
