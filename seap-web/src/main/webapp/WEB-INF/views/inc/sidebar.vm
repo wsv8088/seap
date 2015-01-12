@@ -38,7 +38,7 @@
     </div>
 
     <!-- 显示功能菜单 -->
-    #parse("/layout/menu.vm")
+    #parse("/inc/menu.vm")
 
     <!-- #sidebar-shortcuts -->
     <div class="sidebar-collapse" id="sidebar-collapse">

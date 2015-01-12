@@ -1,4 +1,17 @@
-#parse("/layout/header.vm")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>seap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    #parse("/inc/static.vm")
+    <title>seap</title>
+</head>
+<body>
+    #parse("/inc/header.vm")
 <div class="main-container" id="main-container">
     <div class="main-container-inner">
         <a class="menu-toggler" id="menu-toggler" href="#">
@@ -6,9 +19,9 @@
         </a>
 
         <!-- 左边栏，包括设置和功能菜单 -->
-		#parse("/layout/sidebar.vm")
+        #parse("/inc/sidebar.vm")
         <!-- 主区域 begin -->
-		#parse("/layout/content.vm")
+        #parse("/inc/content.vm")
 
         <!-- 主区域 end -->
     </div>
@@ -18,4 +31,6 @@
         <i class="icon-double-angle-up icon-only bigger-110"></i>
     </a>
 </div>
-#parse("/layout/bottom.vm")
+    #parse("/inc/bottom.vm")
+</body>
+</html>

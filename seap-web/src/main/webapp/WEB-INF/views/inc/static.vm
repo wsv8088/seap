@@ -5,28 +5,27 @@
 <!-- 导入样式 -->
 <link rel="stylesheet" href="/static/ace/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="/static/ace/css/font-awesome.min.css" type="text/css"/>
+<link rel="stylesheet" href="/static/ace/css/datepicker.css" type="text/css"/>
 <link rel="stylesheet" href="/static/ace/css/ui.jqgrid.css" type="text/css"/>
 <link rel="stylesheet" href="/static/ace/css/ace.min.css" type="text/css"/>
 <link rel="stylesheet" href="/static/ace/css/ace-rtl.min.css" type="text/css"/>
 <link rel="stylesheet" href="/static/ace/css/ace-skins.min.css" type="text/css"/>
 
-<link rel="stylesheet" href="/static/ace/css/datepicker.css" type="text/css"/>
-
 
 <!-- 导入js脚本 -->
 <!-- 第三方脚本 -->
 <script type="text/javascript" src="/static/ace/js/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="/static/ace/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/ace/js/ace-elements.min.js"></script>
-<script type="text/javascript" src="/static/ace/js/ace.min.js"></script>
-<script type="text/javascript" src="/static/ace/js/ace-extra.min.js"></script>
 <script type="text/javascript" src="/static/ace/js/jqGrid/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="/static/ace/js/jqGrid/i18n/grid.locale-en.js"></script>
-
 <!-- 自定义脚本 -->
 <script type="text/javascript" src="/static/js/common.js"></script>
 <script type="text/javascript" src="/static/js/iLoad.js"></script>
 <script type="text/javascript" src="/static/js/iMove.js.js"></script>
+
+<script type="text/javascript" src="/static/ace/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/ace/js/ace-elements.min.js"></script>
+<script type="text/javascript" src="/static/ace/js/ace.min.js"></script>
+<script type="text/javascript" src="/static/ace/js/ace-extra.min.js"></script>
 
 
 

@@ -17,7 +17,7 @@ var iLoadJS = iLoadJS || {
          * Date:   2014/02/28;
          ---------------------------------------------*/
         loadPage: (function (url, _paramData, _callbackFun) {
-            $("#page_iframe").get(0).src = url;
+            this.load("page-content", url, _paramData, _callbackFun);
         }),
         load: (function (containerId, url, _paramData, _callbackFun) {
             if (!document.getElementById(containerId)) {
@@ -27,6 +27,11 @@ var iLoadJS = iLoadJS || {
             if (!url) {
                 alert("请传递需要加载的URL！");
                 return false;
+            }
+            if (url.indexOf("?") != -1) {
+                url += "&v=" + new Date().getTime();
+            } else {
+                url += "?v=" + new Date().getTime();
             }
             showWaiting();
             $("#" + containerId).load(url, _paramData || null, function (data) {
