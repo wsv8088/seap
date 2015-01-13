@@ -8,11 +8,6 @@ $(function () {
         $(obj).parents("li").attr("class", "active open");
     });
     // 其他
-
-    $("#menuFrame").load(function () {
-        var height = $(this).contents().find("body").height();
-        $(this).height(height);
-    });
 });
 
 
