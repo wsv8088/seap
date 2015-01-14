@@ -64,7 +64,7 @@ public class Page<T> {
 		this.page = page;
 		this.pageSize = pageSize;
 		this.total = total;
-		this.pageCount = (int) Math.ceil(((double) total / (double) pageSize));
+		this.pageCount = (int) Math.ceil(total / pageSize);
 		this.rows = new ArrayList<T>(pageSize);
 	}
 

@@ -92,15 +92,18 @@ public abstract class MyBatisBaseDao extends SqlSessionDaoSupport {
 		return list;
 	}
 
-	public <T> Page<T> queryForPage (String classMethod, QueryParam queryParam) {
-		Page<T> page = new Page<T>();
+	public <T> Page<T> queryForPage (String classMethod, QueryParam param) {
+		Page<T> page = null;
 		try {
-			List<T> list = this.getSqlSession().selectList(getNamespace() + DELIMITER + classMethod, queryParam,
-					new RowBounds(queryParam.getPageNo(), queryParam.getPageSize()));
+			int offset = (param.getPageNo() - 1) * param.getPageSize();
+			int limit = param.getPageSize();
+			List<T> list = this.getSqlSession().selectList(getNamespace() + DELIMITER + classMethod, param,
+					new RowBounds(offset, limit));
+			int total = selectCount(classMethod, param.getAllParam());
+			page = new Page<T>(param.getPageNo(), limit, total);
 			page.setRows(list);
-			int total = selectCount(classMethod, queryParam.getAllParam());
-			page.setTotal(total);
 		} catch (Exception e) {
+			page = new Page<T>();
 			logger.error(e.getMessage());
 		}
 		return page;
