@@ -5,9 +5,11 @@
 var seap = {};
 // grid定义与封装
 seap.grid = {
+    // 默认grid的容器id(div/table/...)
+    defaultTarget: 'dg',
     // 加载grid控件到指定的容器
     load: function (op) {
-        this.options = $.extend({
+        var options = $.extend({
             target: "grid",
             mtype: "post",
             datatype: "json",
@@ -26,6 +28,8 @@ seap.grid = {
             nav: false
             // 自定义传递到后台的参数名
         }, op);
+        var target = options.target ? options.target : this.defaultTarget;
+        $('#' + target).jqGrid(options);
     },
 
     queryData: function (obj) {
@@ -64,11 +68,11 @@ seap.grid = {
         }
         return $('#' + target).jqGrid('getGridParam');
     },
-    refresh: function (target) {
+    reload: function (target) {
         if (target == undefined) {
             target = this.defaultTarget;
         }
-        $('#' + target).datagrid('reload');
+        $('#' + target).jqGrid().trigger();
     },
     getSelections: function (target) {
         if (target == undefined) {
