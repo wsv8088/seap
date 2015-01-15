@@ -177,7 +177,6 @@ Jd.DataGrid = function (obj) {
     };
 };
 
-
 Jd.grid = {
     defaultTarget: 'dg',
     loadGrid: function (opt) {
