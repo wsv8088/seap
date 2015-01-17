@@ -16,10 +16,10 @@ var iLoadJS = iLoadJS || {
          * ret: 无
          * Date:   2014/02/28;
          ---------------------------------------------*/
-        loadPage: (function (url, _paramData, _callbackFun) {
-            this.load("page-content", url, _paramData, _callbackFun);
+        loadPage: (function (url, params, callbackFunction) {
+            this.load("page-content", url, params, callbackFunction);
         }),
-        load: (function (containerId, url, _paramData, _callbackFun) {
+        load: (function (containerId, url, params, callbackFunction) {
             if (!document.getElementById(containerId)) {
                 //alert("传递的容器ID在页面中无法找到！");
                 return false;
@@ -34,11 +34,11 @@ var iLoadJS = iLoadJS || {
                 url += "?v=" + new Date().getTime();
             }
             showWaiting();
-            $("#" + containerId).load(url, _paramData || null, function (data) {
+            $("#" + containerId).load(url, params || null, function (data) {
                 //hideWaiting();
                 try {
-                    if (_callbackFun && typeof(_callbackFun) == "function") {
-                        _callbackFun(data);
+                    if (callbackFunction && typeof(callbackFunction) == "function") {
+                        callbackFunction(data);
                     }
                 }
                 catch (e) {
