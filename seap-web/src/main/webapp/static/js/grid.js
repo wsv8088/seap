@@ -1,9 +1,18 @@
 /**
  * Created by dbwangshuang on 2015/1/14.
  */
+var seap = {};
+seap.goto = function(options) {
+    var op = $.extend({
+        url: '',
+        type: 'ajax',// ajax,iframe
+        success: null
+    }, options);
+
+}
 
 // grid定义与封装
-var grid = {
+seap.grid = {
     // 默认grid的容器id(div/table/...)
     defaultTarget: '#dg',
     defaultPager: '#pager',
