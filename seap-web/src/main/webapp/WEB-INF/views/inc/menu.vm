@@ -12,7 +12,7 @@
                 #foreach($c in $menulist)
                     #if (${c.parentId} == ${p.id})
                         <li>
-                            <a href="javascript:void(0);" onclick="iLoadJS.loadPage('${c.href}')">
+                            <a href="javascript:;" onclick="seap.loadpage({url:'${c.href}',callback:'${c.callback}'})">
                                 <i class="icon-double-angle-right"></i>
                                 ${c.name}
                             </a>

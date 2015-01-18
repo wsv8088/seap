@@ -6,7 +6,7 @@ var seap = {};
 // grid定义与封装
 seap.grid = {
     // 默认grid的容器id(div/table/...)
-    defaultTarget: 'dg',
+    defaultTarget: "dg",
     // 加载grid控件到指定的容器
     load: function (op) {
         var options = $.extend({
@@ -29,7 +29,7 @@ seap.grid = {
             // 自定义传递到后台的参数名
         }, op);
         var target = options.target ? options.target : this.defaultTarget;
-        $('#' + target).jqGrid(options);
+        $("#" + target).jqGrid(options);
     },
 
     queryData: function (obj) {

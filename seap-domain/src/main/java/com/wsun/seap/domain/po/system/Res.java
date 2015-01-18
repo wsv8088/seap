@@ -8,115 +8,125 @@ import java.util.List;
  */
 public class Res extends BaseEntity {
 
-	private Integer parentId;    // 父级菜单
+    private Integer parentId;    // 父级菜单
 
-	private Integer resType; // 资源类型
+    private Integer resType; // 资源类型
 
-	private String name;    // 名称
+    private String name;    // 名称
 
-	private String href;    // 链接
+    private String href;    // 链接
 
-	private String target;    // 目标（ mainFrame、_blank、_self、_parent、_top）
+    private String target;    // 目标（ mainFrame、_blank、_self、_parent、_top）
 
-	private String icon;    // 图标
+    private String callback;    // 菜单加载到主区域后的回调函数
 
-	private Integer sort;    // 排序
+    private String icon;    // 图标
 
-	private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
+    private Integer sort;    // 排序
 
-	private Integer isLeaf; // 是否是叶子节点
+    private String isShow;    // 是否在菜单中显示（1：显示；0：不显示）
 
-	private String isSyncWorkflow;    // 是否同步到工作流（1：同步；0：不同步）
+    private Integer isLeaf; // 是否是叶子节点
 
-	private String permission; // 权限标识
+    private String isSyncWorkflow;    // 是否同步到工作流（1：同步；0：不同步）
 
-	public Integer getParentId () {
-		return parentId;
-	}
+    private String permission; // 权限标识
 
-	public void setParentId (Integer parentId) {
-		this.parentId = parentId;
-	}
+    public Integer getParentId() {
+        return parentId;
+    }
 
-	public Integer getResType () {
-		return resType;
-	}
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setResType (Integer resType) {
-		this.resType = resType;
-	}
+    public Integer getResType() {
+        return resType;
+    }
 
-	public String getName () {
-		return name;
-	}
+    public void setResType(Integer resType) {
+        this.resType = resType;
+    }
 
-	public void setName (String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getHref () {
-		return href;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setHref (String href) {
-		this.href = href;
-	}
+    public String getCallback() {
+        return callback;
+    }
 
-	public String getTarget () {
-		return target;
-	}
+    public void setCallback(String callback) {
+        this.callback = callback;
+    }
 
-	public void setTarget (String target) {
-		this.target = target;
-	}
+    public String getHref() {
+        return href;
+    }
 
-	public String getIcon () {
-		return icon;
-	}
+    public void setHref(String href) {
+        this.href = href;
+    }
 
-	public void setIcon (String icon) {
-		this.icon = icon;
-	}
+    public String getTarget() {
+        return target;
+    }
 
-	public Integer getSort () {
-		return sort;
-	}
+    public void setTarget(String target) {
+        this.target = target;
+    }
 
-	public void setSort (Integer sort) {
-		this.sort = sort;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public String getIsShow () {
-		return isShow;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	public void setIsShow (String isShow) {
-		this.isShow = isShow;
-	}
+    public Integer getSort() {
+        return sort;
+    }
 
-	public Integer getIsLeaf () {
-		return isLeaf;
-	}
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 
-	public void setIsLeaf (Integer isLeaf) {
-		this.isLeaf = isLeaf;
-	}
+    public String getIsShow() {
+        return isShow;
+    }
 
-	public String getIsSyncWorkflow () {
-		return isSyncWorkflow;
-	}
+    public void setIsShow(String isShow) {
+        this.isShow = isShow;
+    }
 
-	public void setIsSyncWorkflow (String isSyncWorkflow) {
-		this.isSyncWorkflow = isSyncWorkflow;
-	}
+    public Integer getIsLeaf() {
+        return isLeaf;
+    }
 
-	public String getPermission () {
-		return permission;
-	}
+    public void setIsLeaf(Integer isLeaf) {
+        this.isLeaf = isLeaf;
+    }
 
-	public void setPermission (String permission) {
-		this.permission = permission;
-	}
+    public String getIsSyncWorkflow() {
+        return isSyncWorkflow;
+    }
+
+    public void setIsSyncWorkflow(String isSyncWorkflow) {
+        this.isSyncWorkflow = isSyncWorkflow;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
 }
 
 

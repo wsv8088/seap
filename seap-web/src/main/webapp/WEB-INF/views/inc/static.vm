@@ -27,9 +27,10 @@
 
 <!-- 自定义脚本 -->
 <script type="text/javascript" src="/static/js/common.js"></script>
-<script type="text/javascript" src="/static/js/grid.js"></script>
-<script type="text/javascript" src="/static/js/iLoad.js"></script>
-<script type="text/javascript" src="/static/js/iMove.js.js"></script>
+<script type="text/javascript" src="/static/js/iMove.js"></script>
+
+<script type="text/javascript" src="/static/js/system/user/user_list.js"></script>
+
 
 
 
