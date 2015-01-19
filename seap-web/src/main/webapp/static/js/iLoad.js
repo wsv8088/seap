@@ -16,12 +16,12 @@ var iLoadJS = iLoadJS || {
          * ret: 无
          * Date:   2014/02/28;
          ---------------------------------------------*/
-        loadPage: (function (url, params, callbackFunction) {
-            this.load("page-content", url, params, callbackFunction);
+        loadPage: (function (url, _paramData, callbackFuncName) {
+            this.load("page-content", url, _paramData, eval(callbackFuncName + "()"));
         }),
-        load: (function (containerId, url, params, callbackFunction) {
+        load: (function (containerId, url, _paramData, _callbackFun) {
             if (!document.getElementById(containerId)) {
-                //alert("传递的容器ID在页面中无法找到！");
+                alert("传递的容器ID在页面中无法找到！");
                 return false;
             }
             if (!url) {
@@ -34,11 +34,15 @@ var iLoadJS = iLoadJS || {
                 url += "?v=" + new Date().getTime();
             }
             showWaiting();
-            $("#" + containerId).load(url, params || null, function (data) {
+            if ($("#" + containerId).load(url)) {
+                $("#" + containerId).html("<div>未找到您要的页面!</div>");
+                return false;
+            }
+            $("#" + containerId).load(url, _paramData || null, function (data) {
                 //hideWaiting();
                 try {
-                    if (callbackFunction && typeof(callbackFunction) == "function") {
-                        callbackFunction(data);
+                    if (_callbackFun && typeof(_callbackFun) == "function") {
+                        _callbackFun(_paramData);
                     }
                 }
                 catch (e) {

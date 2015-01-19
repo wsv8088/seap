@@ -6,6 +6,7 @@ import com.wsun.seap.dao.context.Page;
 import com.wsun.seap.domain.po.system.User;
 import com.wsun.seap.service.system.UserService;
 import com.wsun.seap.web.controller.BaseController;
+import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,6 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index (Model model) {
-
 		return "modules/system/user/user_list";
 	}
 

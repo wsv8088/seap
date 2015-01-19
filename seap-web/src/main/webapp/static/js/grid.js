@@ -1,30 +1,21 @@
 /**
  * Created by dbwangshuang on 2015/1/14.
  */
+// 定义与grid相关的对象
 var seap = {};
-seap.goto = function(options) {
-    var op = $.extend({
-        url: '',
-        type: 'ajax',// ajax,iframe
-        success: null
-    }, options);
-
-}
-
 // grid定义与封装
 seap.grid = {
     // 默认grid的容器id(div/table/...)
-    defaultTarget: '#dg',
-    defaultPager: '#pager',
+    defaultTarget: "dg",
     // 加载grid控件到指定的容器
     load: function (op) {
         var options = $.extend({
-            target: this.defaultTarget,
+            target: "grid",
             mtype: "post",
             datatype: "json",
             height: 300,
             viewrecords: true,
-            pager: this.defaultPager,
+            pager: "pager",
             rowNum: 10,
             toolbar: true,
             rowList: [10, 20, 30, 40, 50],
@@ -33,32 +24,68 @@ seap.grid = {
             multikey: "ctrlKey",
             multiboxonly: true,
             autowidth: true,
-            rownumbers: true
+            rownumbers: true,
+            nav: false
             // 自定义传递到后台的参数名
         }, op);
-        $(options.target).jqGrid(options);
+        var target = options.target ? options.target : this.defaultTarget;
+        $("#" + target).jqGrid(options);
     },
 
-    /** 获取grid数据的过滤条件 **/
-    getQueryParams: function (target) {
-        return this.getGridParam(target);
+    queryData: function (obj) {
+        var target = obj.target ? obj.target : this.defaultTarget;
+        var options = $.extend({
+            target: target,
+            url: null,
+            data: null
+        }, obj);
+
+
+        if (options.url != null) {
+            var op = this.getOptions(target);
+            op.url = options.url;
+        }
+
+        if (options.data != null) {
+            var queryParams = this.getQueryParams(target);
+            var data = options.data;
+            for (var o in data) {
+                queryParams[o] = data[o];
+            }
+        }
+        this.loadData(target);
     },
-    getGridParam: function (target, paramName) {
-        if (paramName) {
-            return $(target).jqGrid('getGridParam', paramName);
+    getQueryParams: function (target) {
+        if (target == undefined) {
+            target = this.defaultTarget;
         }
-        else {
-            return $('#' + target).jqGrid('getGridParam');
+        var queryParams = $('#' + target).datagrid('options').queryParams;
+        return queryParams;
+    },
+    getOptions: function (target) {
+        if (target == undefined) {
+            target = this.defaultTarget;
         }
+        return $('#' + target).jqGrid('getGridParam');
     },
     reload: function (target) {
-        $('#' + target).jqGrid().trigger("reloadGrid");
+        if (target == undefined) {
+            target = this.defaultTarget;
+        }
+        $('#' + target).jqGrid().trigger();
     },
     getSelections: function (target) {
-        return this.getGridParam(target, "selrow");
+        if (target == undefined) {
+            target = this.defaultTarget;
+        }
+        var selections = $('#' + target).datagrid('getSelections');
+        return selections;
     },
     getRows: function (target) {
-        var selectId = this.getSelections(target);
-        return $('#' + target).jqGrid('getRowData', selectId);
+        if (target == undefined) {
+            target = this.defaultTarget;
+        }
+        var rows = $('#' + target).jqGrid('getRowData');
+        return rows;
     }
 }

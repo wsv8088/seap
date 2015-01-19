@@ -1,8 +1,6 @@
-<div class="page-content">
-    <table id="grid-table"></table>
+<table id="grid-table"></table>
+<div id="grid-pager"></div>
+<div><input type="button" value="点我试试" onclick="test()"/> </div>
+<script>
 
-    <div id="grid-pager"></div>
-
-    <div><input type="button" value="取参数" onclick="clickMe()"/></div>
-
-</div>
+</script>
