@@ -5,9 +5,11 @@ $(function () {
         // 获取触发事件的控件<a>
         var obj = e.target;
         $("ul[class='nav nav-list'] li").removeClass();
-        $(obj).parents("li").attr("class", "active open");
+        var liObj = $(obj).parents("li");
+        liObj.attr("class", "active open");
     });
-    // 其他
+    // 获取点击的
+
 });
 
 
@@ -17,6 +19,14 @@ function showWaiting() {
 function hideWaiting() {
 }
 
+function findParentNode(node) {
+    /*var parentNode = $(node).parents("a");
+    if (parentNode) {
+        return findParentNode(parentNode) + $(node).innerText;
+    }
+    return parentNode.html() + " > " + $(node).innerText;*/
+
+}
 
 var seap = {};
 /**
@@ -35,16 +45,16 @@ seap.loadpage = function (options) {
 
     if (op.type == 'iframe') {
         var str_iframe = "<iframe id='mainframe' name='mainframe' src='" + op.url
-            + "' frameborder=0 scrolling='auto' width='100%'></iframe>";
+            + "' d=0 scrolling='auto' width='100%'></iframe>";
         $("#page-content").empty().append(str_iframe);
     } else if (op.type == 'ajax') {
-        $("#" + op.target).load(op.url, op.params || null, function(data) {
+        $("#" + op.target).load(op.url, op.params || null, function (data) {
             if (typeof(op.callback) == "function") {
                 op.callback();
             } else if (typeof(op.callback) == "string") {
                 eval(op.callback + "()");
             }
-        }) ;
+        });
 
     } else {
         alert("页面跳转类型错误");
@@ -52,18 +62,21 @@ seap.loadpage = function (options) {
     }
 };
 
+
+// grid定义与封装
 seap.grid = {
     // 默认grid的容器id(div/table/...)
-    defaultTarget: 'dg',
+    defaultTarget: '#dg',
+    defaultPager: '#pager',
     // 加载grid控件到指定的容器
     load: function (op) {
         var options = $.extend({
-            target: "grid",
-            mtype: "POST",
+            target: this.defaultTarget,
+            mtype: "post",
             datatype: "json",
-            height: 300,
+            height: 320,
             viewrecords: true,
-            pager: "#pager",
+            pager: this.defaultPager,
             rowNum: 10,
             toolbar: true,
             rowList: [10, 20, 30, 40, 50],
@@ -71,14 +84,32 @@ seap.grid = {
             multiselect: true,
             multikey: "ctrlKey",
             multiboxonly: true,
-            autowidth: true,
-            rownumbers: true,
-            nav: false
+            autowidth: true
             // 自定义传递到后台的参数名
         }, op);
-        var target = options.target ? options.target : this.defaultTarget;
-        $(target).jqGrid(options);
+        $(options.target).jqGrid(options);
+    },
+
+    /** 获取grid数据的过滤条件 **/
+    getQueryParams: function (target) {
+        return this.getGridParam(target);
+    },
+    getGridParam: function (target, paramName) {
+        if (paramName) {
+            return $(target).jqGrid('getGridParam', paramName);
+        }
+        else {
+            return $('#' + target).jqGrid('getGridParam');
+        }
+    },
+    reload: function (target) {
+        $('#' + target).jqGrid().trigger("reloadGrid");
+    },
+    getSelections: function (target) {
+        return this.getGridParam(target, "selrow");
+    },
+    getRows: function (target) {
+        var selectId = this.getSelections(target);
+        return $('#' + target).jqGrid('getRowData', selectId);
     }
-
-
 }

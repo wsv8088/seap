@@ -1,15 +1,7 @@
-function test() {
-    $.ajax({
-        type: 'POST',
-        url: "http://localhost/user/user_list",
-        dataType: "json"
-    });
-    alert("");
-}
 function init() {
     seap.grid.load({
         target: "#grid-table",
-        url: "#springUrl('')/user/user_list",
+        url: '/user/user_list',
         colNames: [' ', '公司', '部门', '用户名', '真实姓名', '邮箱', '联系电话'],
         colModel: [
             {},
@@ -104,6 +96,4 @@ function init() {
             }
         }
     )
-
-
 }
