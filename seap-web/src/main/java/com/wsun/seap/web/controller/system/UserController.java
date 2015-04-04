@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.io.BufferedInputStream;
 
 /**
  * Created by Administrator on 2014/12/14 0014.
@@ -40,6 +41,7 @@ public class UserController extends BaseController {
 	public JsonResult user_list (QueryParam queryParam) {
 		Page<User> page = userService.queryPageUserList(queryParam);
 		return this.success(page);
+
 	}
 
 }
