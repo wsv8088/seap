@@ -24,7 +24,6 @@ seap.grid = {
             multikey: "ctrlKey",
             multiboxonly: true,
             autowidth: true,
-            rownumbers: true,
             nav: false
             // 自定义传递到后台的参数名
         }, op);

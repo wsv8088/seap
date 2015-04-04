@@ -10,13 +10,13 @@
 
     <link type="image/x-icon" href="#springUrl('')/static/images/favicon.ico" rel="shortcut icon">
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="#springUrl('')/static/matrix/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="#springUrl('')/static/matrix/css/bootstrap-responsive.min.css"/>
-    <link rel="stylesheet" href="#springUrl('')/static/matrix/css/unicorn.login.css"/>
+    <link rel="stylesheet" href="/static/matrix/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/matrix/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="/static/matrix/css/unicorn.login.css"/>
 
     <!-- 导入js脚本 -->
-    <script type="text/javascript" src="#springUrl('')/static/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="#springUrl('')/static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
 </head>
 <body>
     $screen_content

@@ -4,7 +4,7 @@
         <li>
             <a href="#" class="dropdown-toggle">
                 <i class="${p.icon}"></i>
-                <span class="menu-text">${p.name}</span>
+                <span class="menu-text" od="${p.id}">${p.name}</span>
                 <b class="arrow icon-angle-down"></b>
             </a>
 

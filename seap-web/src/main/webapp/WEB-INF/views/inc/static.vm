@@ -16,7 +16,7 @@
 
 <!-- 导入js脚本 -->
 <!-- 第三方脚本 -->
-<script type="text/javascript" src="/static/ace/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="#springUrl('')/static/ace/js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/static/ace/js/jqGrid/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="/static/ace/js/jqGrid/i18n/grid.locale-en.js"></script>
 <script type="text/javascript" src="/static/ace/js/bootstrap.min.js"></script>
