@@ -1,7 +1,13 @@
-.classpath
-.project
-.springBeans
-.settings/
-target/
+# Project ignore files
+/.settings
+/.classpath
+/.project
+/.tomcatplugin
+/target
+/work
+/.tomcatplugin
+/src/main/webapp/.#webclasspath
+
+
 *.iml
 .idea/
